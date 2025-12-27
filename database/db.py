@@ -1,10 +1,18 @@
-from sqlalchemy.orm import declarative_base,sessionmaker
-from sqlalchemy import create_engine
+import os
 from contextlib import contextmanager
-DB_URL='postgresql+psycopg://postgres:@localhost:5432/DW'
-engine = create_engine(DB_URL,echo=True)
-SessionLocal=sessionmaker(bind=engine)
-Base=declarative_base()
+
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base, sessionmaker
+
+load_dotenv()
+db_url = os.getenv("DB_URL")
+if db_url is None:
+    raise ValueError("DB_URL environment variable not set")
+engine = create_engine(db_url, echo=True)
+SessionLocal = sessionmaker(bind=engine)
+Base = declarative_base()
+
 
 @contextmanager
 def get_connection():
@@ -12,7 +20,7 @@ def get_connection():
     Makes the database connection
     Ensures that the database connection is closed after use
     """
-    session=SessionLocal()
+    session = SessionLocal()
     try:
         yield session
         session.commit()
