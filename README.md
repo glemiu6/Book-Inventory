@@ -49,7 +49,7 @@ book_inventory/
 ```
 
 ### ER Model
-
+![ER_Model](ER_Model.png)
 
 ## Installation
 
