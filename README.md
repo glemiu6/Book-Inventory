@@ -52,9 +52,43 @@ book_inventory/
 ![ER_Model](ER_Model.png)
 
 ## Installation
+Install [Python](https://www.python.org/downloads/) IDLE.  
+
+Now we create a virtual environment so we can run the code.  
+
+### 1. Creating the environment:
+```bash
+python -m venv venv
+```
+### 2. Activating the environment:
+#### For Mac/Linux:
+
+```bash
+source venv/bin/activate
+```
+#### For Windows:
+```bash
+.\venv\Scripts\activate
+```
+### 3. Installing all the necessary libraries to run the project:
+```bash
+pip install -r requirements.txt
+```
 
 ## Usage
+### 1. Make the main file executable
+```bash
+chmod u+x main.py
+```
 
+### 2. Run the project
+```bash
+./main.py
+```
+or 
+```bash
+python3 main.py
+```
 ## Features
 
 ## Contributing
