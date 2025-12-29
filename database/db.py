@@ -24,6 +24,9 @@ def get_connection():
     try:
         yield session
         session.commit()
+    except:
+        session.rollback()
+        raise
     finally:
         session.close()
 
