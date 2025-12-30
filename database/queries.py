@@ -1,4 +1,6 @@
-from models import Book, Category, LogScrapper
+from pandas.io.sql import SQLiteDatabase, SQLAlchemyEngine
+
+from models import Book, Category, LogScrapper, UserBook, User
 
 
 # ------- For Books----------
@@ -72,3 +74,21 @@ def book_exist(db, title: str, category_id: int) -> bool:
         .filter(Book.title == title, Book.category_id == category_id)
         .first()
     )
+# -------- For User --------
+
+def add_book_user(db,user_id:int,book_id:int):
+    user_book = UserBook(user_id=user_id, book_id=book_id)
+    db.add(user_book)
+    db.flush()
+    return user_book
+
+
+def insert_user(db,username:str,email:str):
+    user = User(username=username, email=email)
+    db.add(user)
+    db.flush()
+    return user
+
+def get_users_books(db,user_id):
+    user=db.query(User).filter(User.id == user_id).first()
+    return user.user_books
