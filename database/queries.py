@@ -22,6 +22,17 @@ def get_books_by_category_id(db, categoty_id: int) -> list[Book]:
     return db.query(Book).filter(Book.category_id == categoty_id).all()
 
 
+def get_books_by_price(db,max_price:float) -> list[Book]:
+    return db.query(Book).filter(
+        Book.price<=max_price
+    ).all()
+
+def get_books_by_rating(db,rating:int)->list[Book]:
+    return db.query(Book).filter(
+        Book.rating==rating
+    ).all()
+
+
 # --------- For category---------
 
 
