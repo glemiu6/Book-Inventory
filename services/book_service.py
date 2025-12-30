@@ -1,5 +1,5 @@
 from database.models import Book
-from database.queries import book_exist, get_all_books, get_category_by_id, insert_book
+from database.queries import book_exist, get_all_books, get_category_by_id, insert_book,get_books_by_price,get_books_by_rating
 from exceptions.book_execeptions import DuplicateBook, InvalidBookData
 
 
@@ -30,8 +30,13 @@ def list_books(db) -> list[Book]:
 
 
 def filter_by_price(db, price: float):
-    pass
+    if price <= 0:
+        raise InvalidBookData("Price must be positive")
+    return get_books_by_price(db, price)
+
 
 
 def filter_by_rating(db, rating: int):
-    pass
+    if rating not in range(1, 6):
+        raise InvalidBookData("Rating must be between 1 and 5")
+    return get_books_by_rating(db, rating)
